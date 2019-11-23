@@ -1,17 +1,17 @@
 import axios from 'axios';
 
+const API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
+
 function fetchTrending(period) {
   return axios
     .get(
-      `https://api.themoviedb.org/3/trending/movie/${period}?api_key=18bb13bff55f0c72a15d89a6d24ad59c`,
+      `https://api.themoviedb.org/3/trending/movie/${period}?api_key=${API_KEY}`,
     )
     .then(res => res.data);
 }
 function fetchMovie(id) {
   return axios
-    .get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=18bb13bff55f0c72a15d89a6d24ad59c`,
-    )
+    .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
     .then(res => {
       return res.data;
     });
@@ -20,7 +20,7 @@ function fetchMovie(id) {
 function fetchMovieByQuery(query, pageNum = 1) {
   return axios
     .get(
-      `https://api.themoviedb.org/3/search/movie?api_key=18bb13bff55f0c72a15d89a6d24ad59c&language=en-US&query=${query}&page=${pageNum}&include_adult=false`,
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${pageNum}&include_adult=false`,
     )
     .then(res => {
       return res.data;
@@ -30,7 +30,7 @@ function fetchMovieByQuery(query, pageNum = 1) {
 function fetchReviews(movieId, pageNum = 1) {
   return axios
     .get(
-      `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=18bb13bff55f0c72a15d89a6d24ad59c&language=en-US&page=${pageNum}`,
+      `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=${pageNum}`,
     )
     .then(res => res.data);
 }
@@ -38,7 +38,7 @@ function fetchReviews(movieId, pageNum = 1) {
 function fetchCast(movieId) {
   return axios
     .get(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=18bb13bff55f0c72a15d89a6d24ad59c`,
+      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`,
     )
     .then(res => res.data.cast);
 }
