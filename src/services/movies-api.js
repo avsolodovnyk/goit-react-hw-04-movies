@@ -2,11 +2,9 @@ import axios from 'axios';
 
 const API_KEY = process.env.REACT_APP_MOVIES_API_KEY;
 
-function fetchTrending(period) {
+function fetchTrending() {
   return axios
-    .get(
-      `https://api.themoviedb.org/3/trending/movie/${period}?api_key=${API_KEY}`,
-    )
+    .get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`)
     .then(res => res.data);
 }
 function fetchMovie(id) {

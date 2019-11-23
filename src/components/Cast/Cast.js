@@ -26,11 +26,13 @@ export default class Cast extends Component {
           cast.map(item => (
             <li key={item.cast_id}>
               <p>{item.name}</p>
-              <img
-                src={`https://image.tmdb.org/t/p/w200/${item.profile_path}`}
-                alt={item.profile_path}
-                width="100px"
-              />
+              {item.profile_path && (
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${item.profile_path}`}
+                  alt={item.profile_path}
+                  width="100px"
+                />
+              )}
               <p>{item.character}</p>
             </li>
           ))}

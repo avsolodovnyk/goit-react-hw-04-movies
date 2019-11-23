@@ -9,11 +9,10 @@ export default class HomePage extends Component {
     location: PropTypes.shape().isRequired,
   };
 
-  state = { results: [], period: 'day' };
+  state = { results: [] };
 
   componentDidMount() {
-    const { period } = this.state;
-    moviesAPI.fetchTrending(period).then(data => {
+    moviesAPI.fetchTrending().then(data => {
       return this.setState({ results: data.results });
     });
   }
