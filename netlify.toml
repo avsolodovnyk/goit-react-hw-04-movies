@@ -3,7 +3,6 @@
   command = "npm run build"
   functions = "functions"
   publish = "build"
-  environment = { REACT_APP_MOVIES_API_KEY = "18bb13bff55f0c72a15d89a6d24ad59c" }
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app. 
   ## Not needed for static site generators.
