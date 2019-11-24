@@ -7,7 +7,7 @@ export default class Reviews extends Component {
     match: PropTypes.shape().isRequired,
   };
 
-  state = { reviews: [] };
+  state = { reviews: null };
 
   componentDidMount() {
     this.fetchReviews();
@@ -15,17 +15,19 @@ export default class Reviews extends Component {
 
   fetchReviews = () => {
     const { movieId } = this.props.match.params;
-    moviesAPI
-      .fetchReviews(movieId)
-      .then(res => this.setState({ reviews: res.results }));
+    moviesAPI.fetchReviews(movieId).then(res => {
+      if (!res.total_results) {
+        return;
+      }
+      this.setState({ reviews: res.results });
+    });
   };
 
   render() {
     const { reviews } = this.state;
-    return reviews.length === 0 ? (
-      <div>No reviews</div>
-    ) : (
+    return (
       <ul>
+        {!reviews && <div>no reviews</div>}
         {reviews &&
           reviews.map(item => (
             <li key={item.id}>
