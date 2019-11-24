@@ -11,7 +11,7 @@ class MoviesPage extends Component {
     location: PropTypes.shape().isRequired,
   };
 
-  state = { results: [], pageNum: 0 };
+  state = { results: null };
 
   componentDidMount() {
     const { location } = this.props;
@@ -44,9 +44,8 @@ class MoviesPage extends Component {
   };
 
   fetchMovie = searchQuery => {
-    const { pageNum } = this.state;
-    moviesAPI.fetchMovieByQuery(searchQuery, pageNum + 1).then(res => {
-      this.setState({ results: res.results, pageNum: res.page });
+    moviesAPI.fetchMovieByQuery(searchQuery).then(res => {
+      this.setState({ results: res.results });
     });
   };
 
@@ -57,20 +56,21 @@ class MoviesPage extends Component {
       <>
         <Searchbar handleSubmit={this.setSearchQuery} />
         <ul>
-          {results.map(item => {
-            return (
-              <li key={item.id}>
-                <Link
-                  to={{
-                    pathname: `${match.url}/${item.id}`,
-                    state: { from: location },
-                  }}
-                >
-                  {item.title}
-                </Link>
-              </li>
-            );
-          })}
+          {results &&
+            results.map(item => {
+              return (
+                <li key={item.id}>
+                  <Link
+                    to={{
+                      pathname: `${match.url}/${item.id}`,
+                      state: { from: location },
+                    }}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </>
     );

@@ -9,7 +9,7 @@ export default class HomePage extends Component {
     location: PropTypes.shape().isRequired,
   };
 
-  state = { results: [] };
+  state = { results: null };
 
   componentDidMount() {
     moviesAPI.fetchTrending().then(data => {
@@ -23,20 +23,21 @@ export default class HomePage extends Component {
     return (
       <>
         <ul>
-          {results.map(item => {
-            return (
-              <li key={item.id}>
-                <Link
-                  to={{
-                    pathname: `${routes.MOVIES}/${item.id}`,
-                    state: { from: location },
-                  }}
-                >
-                  {item.title}
-                </Link>
-              </li>
-            );
-          })}
+          {results &&
+            results.map(item => {
+              return (
+                <li key={item.id}>
+                  <Link
+                    to={{
+                      pathname: `${routes.MOVIES}/${item.id}`,
+                      state: { from: location },
+                    }}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </>
     );
